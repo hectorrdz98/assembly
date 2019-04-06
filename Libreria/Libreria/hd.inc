@@ -25,7 +25,7 @@ hd_exitProgram macro
 endm
 
 
-hd_fact macro n:REQ
+hd_factorial macro n:REQ
 	; This macro get the factorial of "n" and return the result in EAX
     ; Input: DWORD n (number to get the factorial)
     ; Output: DWORD EAX (factorial)
@@ -36,5 +36,21 @@ hd_fact macro n:REQ
 	ciclo:
 		mul ecx
 		loop ciclo
+	pop ecx
+endm
+
+
+hd_abs macro n:REQ
+	; This macro get the absolute value of "n" and return the result in EAX
+    ; Input: DWORD n (number to get the absolute value)
+    ; Output: DWORD EAX (absolute value)
+	local continue
+	push ecx
+	mov eax,n
+	mov ecx,-1
+	cmp eax,0
+	jge continue
+		mul ecx
+	continue:
 	pop ecx
 endm
