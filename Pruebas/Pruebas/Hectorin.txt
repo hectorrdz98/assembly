@@ -1,0 +1,4 @@
+PrintX macro
+	mov al,'X'
+	call WriteChar
+endm

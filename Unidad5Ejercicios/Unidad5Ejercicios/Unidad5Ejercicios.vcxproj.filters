@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <MASM Include="Ej1.asm" />
+    <MASM Include="Ej2.asm" />
+    <MASM Include="Ej3.asm" />
+    <MASM Include="Ej4.asm" />
+    <MASM Include="Ej5.asm" />
+    <MASM Include="Ej6.asm" />
+    <MASM Include="Ej7.asm" />
+    <MASM Include="Ej8.asm" />
+  </ItemGroup>
+</Project>
