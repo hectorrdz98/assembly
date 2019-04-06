@@ -1,10 +1,10 @@
 .486
 
+include C:\Irvine\Irvine32.inc
 includelib C:\Irvine\Kernel32.Lib
 includelib C:\Irvine\User32.Lib
 includelib C:\Irvine\Irvine32.lib
 
-include C:\Irvine\Irvine32.inc
 include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.inc
 
 
@@ -15,6 +15,10 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	num dword 1
 
 	msg3 db "El valor absoluto de ",0
+
+	msg4 db " elevado a ",0
+
+	result  REAL8 0.0
 .code
 
 start:
@@ -22,7 +26,9 @@ start:
 	call example1
 	call Crlf
 	call example2
-
+	call CRlf
+	call example3
+	
 	hd_exitProgram
 	ret
 
@@ -81,5 +87,31 @@ example2 proc
 example2 endp
 
 
+example3 proc
+	pushad
+	; Example 1: Get the factorial of one number
+	mov num,1
+	mov ebx,3
+	mov ecx,5
+	ciclo:
+		mov eax, num
+		call WriteDec
+		lea edx, msg4
+		call WriteString
+		mov eax, ebx
+		call WriteDec
+		lea edx, msg2
+		call WriteString
+
+		hd_pow num, ebx
+
+		call WriteDec
+		call Crlf
+
+		inc num
+		loop ciclo
+	popad
+	ret
+example3 endp
 
 end start

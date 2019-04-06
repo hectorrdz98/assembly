@@ -5,6 +5,7 @@
 ;
 ; Required: 
 ;		1.- Irvine32.inc (and all dependencies to get it work)
+;		2.- msvcrt.inc (and all dependencies to get it work)
 ; Tips:
 ;		1.- Don't redefine the variables used in this library (all start with hd_)	
 
@@ -53,4 +54,23 @@ hd_abs macro n:REQ
 		mul ecx
 	continue:
 	pop ecx
+endm
+
+
+hd_pow macro n:REQ, power:REQ
+	; This macro returns "n" raised to the power "power"
+    ; Input: DWORD n (number), DWORD power (power)
+    ; Output: DWORD EAX (n raised to power)
+	local ciclo, base
+	.data
+		base EQU	n
+	.code
+		push ecx
+		mov eax, n
+		mov ecx, power
+		dec ecx
+		ciclo:
+			mul base
+			loop ciclo
+		pop ecx
 endm
