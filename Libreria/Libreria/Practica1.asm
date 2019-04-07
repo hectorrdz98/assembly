@@ -10,6 +10,8 @@ includelib C:\Irvine\Irvine32.lib
 
 include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.inc
 
+
+
 .data
 	msg1 db "El factorial de ",0
 	msg2 db " es: ",0
@@ -20,8 +22,12 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	msg4 db " elevado a ",0
 
 	msg5 db "Array: ",0
-	arr1 dword 1h,2h,3h,4h
+	arr1 dword 3,6,8,2
 
+	msg6 db "Suma: ",0
+	msg7 db "Producto: ",0
+	msg8 db "Maximo: ",0
+	msg9 db "Minimo: ",0
 .code
 
 start:
@@ -35,7 +41,13 @@ start:
 	call example3
 	call Crlf
 
+	call printArr
+	call Crlf
+
 	call example4
+	call Crlf
+
+	call example5
 	call Crlf
 
 	call Crlf
@@ -122,7 +134,7 @@ example3 proc
 	ret
 example3 endp
 
-example4 proc
+printArr proc
 	pushad
 	mov ecx, lengthof arr1 
 	mov esi, 0
@@ -135,8 +147,35 @@ example4 proc
 		call WriteChar
 		add esi, type arr1
 		loop ciclo
+	call Crlf
+	popad
+	ret
+printArr endp
+
+example4 proc
+	pushad
+
+	lea edx, msg6
+	call WriteString
+
+	hd_arrMax arr1
+	call WriteDec
+
 	popad
 	ret
 example4 endp
+
+example5 proc
+	pushad
+
+	lea edx, msg7
+	call WriteString
+
+	hd_arrProd arr1
+	call WriteDec
+
+	popad
+	ret
+example5 endp
 
 end start
