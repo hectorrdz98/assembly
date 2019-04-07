@@ -35,6 +35,10 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	msg10 db "Array de menor a mayor: ",0
 	msg11 db "Array de mayor a menor: ",0
 	msg12 db "Array volteado: ",0
+
+	msg13 db "Array + ",0
+	msg14 db "Array x ",0
+	msg15 db "Array ^ ",0
 .code
 
 start:
@@ -80,8 +84,15 @@ start:
 	call printArr2
 	call Crlf
 
-
+	call example11
 	call Crlf
+
+	call example12
+	call Crlf
+
+	call example13
+	call Crlf
+
 	call exitProgram
 	ret
 
@@ -294,5 +305,105 @@ example10 proc
 	popad
 	ret
 example10 endp
+
+example11 proc
+	pushad
+
+	call fillArr2
+
+	lea edx, msg13
+	call WriteString
+	mov eax, 2
+	call WriteInt
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllSum arr2, eax
+
+	call printArr2
+
+	call fillArr2
+
+	lea edx, msg13
+	call WriteString
+	mov eax, -1
+	call WriteInt
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllSum arr2, eax
+
+	call printArr2
+
+	popad
+	ret
+example11 endp
+
+example12 proc
+	pushad
+
+	call fillArr2
+
+	lea edx, msg14
+	call WriteString
+	mov eax, 3
+	call WriteDec
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllMult arr2, eax
+
+	call printArr2
+
+	call fillArr2
+
+	lea edx, msg14
+	call WriteString
+	mov eax, 2
+	call WriteDec
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllMult arr2, eax
+
+	call printArr2
+
+	popad
+	ret
+example12 endp
+
+example13 proc
+	pushad
+
+	call fillArr2
+
+	lea edx, msg15
+	call WriteString
+	mov eax, 2
+	call WriteDec
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllPow arr2, eax
+
+	call printArr2
+
+	call fillArr2
+
+	lea edx, msg15
+	call WriteString
+	mov eax, 3
+	call WriteDec
+	lea edx, msg2
+	call WriteString
+
+	hd_arrAllPow arr2, eax
+
+	call printArr2
+
+	popad
+	ret
+example13 endp
+
 
 end start

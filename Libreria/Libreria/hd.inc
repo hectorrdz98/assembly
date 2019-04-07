@@ -5,7 +5,6 @@
 ;
 ; Required: 
 ;		1.- Irvine32.inc (and all dependencies to get it work)
-;		2.- msvcrt.inc (and all dependencies to get it work)
 ; Tips:
 ;		1.- Don't redefine the variables used in this library (all start with hd_)	
 
@@ -295,4 +294,81 @@ hd_arrFlip macro arr
 		add esi, type arr
 		loop ciclo
 	popad
+endm
+
+
+hd_arrAllSum macro arr, n
+	; This macro sums "n" to all elements of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (element + n for all elements)
+	local ciclo, num
+	.data
+		num equ n
+	.code
+		push ecx
+		push esi
+		mov esi, 0
+		mov ecx, lengthof arr
+		ciclo:
+			add arr[esi], num
+			add esi, type arr
+			loop ciclo
+		pop esi
+		pop ecx
+endm
+
+
+hd_arrAllMult macro arr, n
+	; This macro multiply "n" to all elements of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (element * n for all elements)
+	local ciclo
+	.code
+		push ecx
+		push esi
+		mov esi, 0
+		mov ecx, lengthof arr
+		mov ebx, n
+		ciclo:
+			mov eax, arr[esi]
+			mul ebx
+			mov arr[esi], eax
+			add esi, type arr
+			loop ciclo
+		pop esi
+		pop ecx
+endm
+
+
+hd_arrAllPow macro arr, n
+	; This macro elevates each element of the array to "n" for all elements of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (element ^ n for all elements)
+	local ciclo, ciclo2, num
+	.data
+		num dword 0 
+	.code
+		push ecx
+		push esi
+		mov esi, 0
+		mov ecx, lengthof arr
+		mov ebx, n
+		ciclo:
+			push ecx
+
+			mov eax, arr[esi]
+			mov num, eax
+			mov ecx, ebx
+			dec ecx
+			ciclo2:
+				mov edx, num			; Original element value
+				mov eax, arr[esi]
+				mul edx
+				mov arr[esi], eax
+				loop ciclo2
+			pop ecx
+			add esi, type arr
+			loop ciclo
+		pop esi
+		pop ecx
 endm
