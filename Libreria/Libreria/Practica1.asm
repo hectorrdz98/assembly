@@ -19,21 +19,32 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 
 	msg4 db " elevado a ",0
 
+	msg5 db "Array: ",0
+	arr1 dword 1h,2h,3h,4h
+
 .code
 
 start:
 
 	call example1
 	call Crlf
+
 	call example2
-	call CRlf
+	call Crlf
+
 	call example3
+	call Crlf
+
+	call example4
+	call Crlf
+
+	call Crlf
+	call WaitMsg
 
 	ret
 
 example1 proc
 	pushad
-	; Example 1: Get the factorial of one number
 	mov ecx,5
 	ciclo:
 		lea edx, msg1
@@ -56,7 +67,6 @@ example1 endp
 
 example2 proc
 	pushad
-	; Example 1: Get the factorial of one number
 	mov ebx,4
 	lea edx, msg3
 	call WriteString
@@ -88,7 +98,6 @@ example2 endp
 
 example3 proc
 	pushad
-	; Example 1: Get the factorial of one number
 	mov num,1
 	mov ebx,3
 	mov ecx,5
@@ -112,5 +121,22 @@ example3 proc
 	popad
 	ret
 example3 endp
+
+example4 proc
+	pushad
+	mov ecx, lengthof arr1 
+	mov esi, 0
+	lea edx, msg5
+	call WriteString
+	ciclo:
+		mov eax, arr1[esi]
+		call WriteDec
+		mov al, ' '
+		call WriteChar
+		add esi, type arr1
+		loop ciclo
+	popad
+	ret
+example4 endp
 
 end start

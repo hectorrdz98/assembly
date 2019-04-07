@@ -145,9 +145,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <MASM Include="Practica1.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="Practica2.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </MASM>
-    <MASM Include="Practica2.asm" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hd.inc" />
