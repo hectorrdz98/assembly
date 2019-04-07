@@ -1,13 +1,14 @@
 .486
 
 include C:\Irvine\Irvine32.inc
+
+includelib C:\masm32\lib\msvcrt.lib
+
 includelib C:\Irvine\Kernel32.Lib
 includelib C:\Irvine\User32.Lib
 includelib C:\Irvine\Irvine32.lib
 
 include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.inc
-
-
 
 .data
 	msg1 db "El factorial de ",0
@@ -18,18 +19,16 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 
 	msg4 db " elevado a ",0
 
-	result  REAL8 0.0
 .code
 
 start:
-	
+
 	call example1
 	call Crlf
 	call example2
 	call CRlf
 	call example3
-	
-	hd_exitProgram
+
 	ret
 
 example1 proc
