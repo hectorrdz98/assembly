@@ -22,7 +22,7 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	msg4 db " elevado a ",0
 
 	msg5 db "Array: ",0
-	arr1 dword 3,6,8,2
+	arr1 dword 1,2,3,4,5
 
 	msg6 db "Suma: ",0
 	msg7 db "Producto: ",0
@@ -48,6 +48,12 @@ start:
 	call Crlf
 
 	call example5
+	call Crlf
+
+	call example6
+	call Crlf
+
+	call example7
 	call Crlf
 
 	call Crlf
@@ -158,7 +164,7 @@ example4 proc
 	lea edx, msg6
 	call WriteString
 
-	hd_arrMax arr1
+	hd_arrSum arr1
 	call WriteDec
 
 	popad
@@ -177,5 +183,31 @@ example5 proc
 	popad
 	ret
 example5 endp
+
+example6 proc
+	pushad
+
+	lea edx, msg8
+	call WriteString
+
+	hd_arrMax arr1
+	call WriteDec
+
+	popad
+	ret
+example6 endp
+
+example7 proc
+	pushad
+
+	lea edx, msg9
+	call WriteString
+
+	hd_arrMin arr1
+	call WriteDec
+
+	popad
+	ret
+example7 endp
 
 end start

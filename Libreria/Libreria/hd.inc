@@ -60,7 +60,7 @@ hd_pow macro n:REQ, power:REQ
 endm
 
 
-hd_arrMax macro arr
+hd_arrSum macro arr
 	; This macro returns the sum of the elements of an array of DWORD TYPE
     ; Input: DWORD array of any length
     ; Output: DWORD EAX (sum of elements)
@@ -94,6 +94,52 @@ hd_arrProd macro arr
 	ciclo:
 		add esi, type arr
 		mul arr[esi]
+		loop ciclo
+	pop esi
+	pop ecx
+endm
+
+
+hd_arrMax macro arr
+	; This macro returns the max element of the elements of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD EAX (max of elements)
+	local ciclo, continue
+	push ecx
+	push esi
+	mov esi, 0
+	mov ecx, lengthof arr
+	mov eax, 0
+	ciclo:
+		cmp eax, arr[esi]
+		jge continue
+		mov eax, arr[esi]
+		continue:
+		add esi, type arr
+		loop ciclo
+	pop esi
+	pop ecx
+endm
+
+
+hd_arrMin macro arr
+	; This macro returns the min element of the elements of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD EAX (min of elements)
+	local ciclo, continue
+	push ecx
+	push esi
+	mov esi, 0
+	mov ecx, lengthof arr
+	dec ecx
+	mov eax, arr[esi]
+	add esi, type arr
+	ciclo:
+		cmp eax, arr[esi]
+		jle continue
+		mov eax, arr[esi]
+		continue:
+		add esi, type arr
 		loop ciclo
 	pop esi
 	pop ecx
