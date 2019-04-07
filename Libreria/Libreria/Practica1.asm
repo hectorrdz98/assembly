@@ -13,6 +13,8 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 
 
 .data
+	exitMsg db 0dh, 0ah, "Presiona cualquier tecla para salir...", 0
+
 	msg1 db "El factorial de ",0
 	msg2 db " es: ",0
 	num dword 1
@@ -22,12 +24,16 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	msg4 db " elevado a ",0
 
 	msg5 db "Array: ",0
-	arr1 dword 1,2,3,4,5
+	arr1 dword 1,2,3,1,2,3
+	arr2 dword ($-arr1)/4 dup(?)
 
 	msg6 db "Suma: ",0
 	msg7 db "Producto: ",0
 	msg8 db "Maximo: ",0
 	msg9 db "Minimo: ",0
+
+	msg10 db "Array de menor a mayor: ",0
+	msg11 db "Array de mayor a menor: ",0
 .code
 
 start:
@@ -57,9 +63,29 @@ start:
 	call Crlf
 
 	call Crlf
-	call WaitMsg
+	call fillArr2
+	hd_arrSortAsc arr2
+	call example8
+	call printArr2
 
+	call fillArr2
+	hd_arrSortDesc arr2
+	call example9
+	call printArr2
+	call Crlf
+
+
+	call Crlf
+	call exitProgram
 	ret
+
+exitProgram proc
+	lea edx, exitMsg
+    call WriteString
+    call ReadChar
+    exit
+	ret
+exitProgram endp
 
 example1 proc
 	pushad
@@ -158,6 +184,22 @@ printArr proc
 	ret
 printArr endp
 
+printArr2 proc
+	pushad
+	mov ecx, lengthof arr2
+	mov esi, 0
+	ciclo:
+		mov eax, arr2[esi]
+		call WriteDec
+		mov al, ' '
+		call WriteChar
+		add esi, type arr2
+		loop ciclo
+	call Crlf
+	popad
+	ret
+printArr2 endp
+
 example4 proc
 	pushad
 
@@ -209,5 +251,34 @@ example7 proc
 	popad
 	ret
 example7 endp
+
+fillArr2 proc
+	pushad
+	mov ecx, lengthof arr1
+	mov esi, 0
+	ciclo:
+		mov eax, arr1[esi]
+		mov arr2[esi], eax
+		add esi, type arr1
+		loop ciclo
+	popad
+	ret
+fillArr2 endp
+
+example8 proc
+	pushad
+	lea edx, msg10
+	call WriteString
+	popad
+	ret
+example8 endp
+
+example9 proc
+	pushad
+	lea edx, msg11
+	call WriteString
+	popad
+	ret
+example9 endp
 
 end start

@@ -152,7 +152,9 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="hd.inc" />
+    <None Include="hd.inc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

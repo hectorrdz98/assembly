@@ -144,3 +144,125 @@ hd_arrMin macro arr
 	pop esi
 	pop ecx
 endm
+
+
+hd_arrSortAsc macro arr
+	; This macro sort from lower to greater the values of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (sorted asc)
+	local ciclo1, ciclo2, x, continue, exitM
+	.data
+		x equ lengthof arr
+	.code
+		pushad
+
+		mov ecx, x
+		mov esi,0
+		ciclo1:
+			push esi
+			push ecx
+
+			; mov eax, ecx
+			; call WriteDec
+
+			mov eax, arr[esi]	; Element comparing
+			dec ecx				; n-1 elemnents to compare with
+
+			cmp ecx, 0			; If there are only 1 element comparing
+			jle exitM			; exit macro
+
+			add esi, type arr	; Start at the next element
+
+			ciclo2:
+				push ecx
+
+				; mov edx, eax
+				; mov eax, ecx
+				; call WriteDec
+				; mov eax, edx
+
+				cmp eax, arr[esi]	; If last element es greater than actual dont jump
+				jle continue
+
+				mov edx, eax					; Save last temp (eax) on edx
+				mov eax, arr[esi]				; Move actual to last temp (eax)
+				mov arr[esi], edx				; Move last (edx) to actual
+
+				continue:
+				add esi, type arr				; Add to esi another block
+				; call printArr2
+				; call Crlf
+
+				pop ecx
+				loop ciclo2
+
+			pop ecx
+			pop esi
+			mov arr[esi], eax					; Restore temp (eax) to real array
+			add esi, type arr					; Add to esi another block
+			loop ciclo1
+
+		exitM:
+		popad
+endm
+
+
+hd_arrSortDesc macro arr
+	; This macro sort from greater to lower the values of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (sorted desc)
+	local ciclo1, ciclo2, x, continue, exitM
+	.data
+		x equ lengthof arr
+	.code
+		pushad
+
+		mov ecx, x
+		mov esi,0
+		ciclo1:
+			push esi
+			push ecx
+
+			; mov eax, ecx
+			; call WriteDec
+
+			mov eax, arr[esi]	; Element comparing
+			dec ecx				; n-1 elemnents to compare with
+
+			cmp ecx, 0			; If there are only 1 element comparing
+			jle exitM			; exit macro
+
+			add esi, type arr	; Start at the next element
+
+			ciclo2:
+				push ecx
+
+				; mov edx, eax
+				; mov eax, ecx
+				; call WriteDec
+				; mov eax, edx
+
+				cmp eax, arr[esi]	; If last element es greater than actual dont jump
+				jge continue
+
+				mov edx, eax					; Save last temp (eax) on edx
+				mov eax, arr[esi]				; Move actual to last temp (eax)
+				mov arr[esi], edx				; Move last (edx) to actual
+
+				continue:
+				add esi, type arr				; Add to esi another block
+				; call printArr2
+				; call Crlf
+
+				pop ecx
+				loop ciclo2
+
+			pop ecx
+			pop esi
+			mov arr[esi], eax					; Restore temp (eax) to real array
+			add esi, type arr					; Add to esi another block
+			loop ciclo1
+
+		exitM:
+		popad
+endm
