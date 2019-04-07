@@ -24,7 +24,7 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 	msg4 db " elevado a ",0
 
 	msg5 db "Array: ",0
-	arr1 dword 1,2,3,1,2,3
+	arr1 dword 4,5,1,2,3,6
 	arr2 dword ($-arr1)/4 dup(?)
 
 	msg6 db "Suma: ",0
@@ -34,10 +34,10 @@ include C:\Users\1ZW05LA_RS4\Documents\Code\2019\Assembly\Libreria\Libreria\hd.i
 
 	msg10 db "Array de menor a mayor: ",0
 	msg11 db "Array de mayor a menor: ",0
+	msg12 db "Array volteado: ",0
 .code
 
 start:
-
 	call example1
 	call Crlf
 
@@ -71,6 +71,12 @@ start:
 	call fillArr2
 	hd_arrSortDesc arr2
 	call example9
+	call printArr2
+	call Crlf
+
+	call fillArr2
+	hd_arrFlip arr2
+	call example10
 	call printArr2
 	call Crlf
 
@@ -280,5 +286,13 @@ example9 proc
 	popad
 	ret
 example9 endp
+
+example10 proc
+	pushad
+	lea edx, msg12
+	call WriteString
+	popad
+	ret
+example10 endp
 
 end start

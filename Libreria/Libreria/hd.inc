@@ -266,3 +266,33 @@ hd_arrSortDesc macro arr
 		exitM:
 		popad
 endm
+
+
+hd_arrFlip macro arr
+	; This macro flips the values of an array of DWORD TYPE
+    ; Input: DWORD array of any length
+    ; Output: DWORD array (flipped)
+	local ciclo
+	pushad
+	mov eax, lengthof arr
+	mov ebx, 2
+	div bl
+
+	mov ah, 0
+
+	mov ecx, eax
+	mov edx, (lengthof arr - 1)
+	mov esi, 0
+	ciclo:
+		mov eax, arr[esi]						; First
+		mov ebx, arr[esi + (type arr * edx)]	; Last
+
+		mov arr[esi], ebx
+		mov arr[esi + (type arr * edx)], eax
+			
+		dec edx
+		dec edx
+		add esi, type arr
+		loop ciclo
+	popad
+endm
